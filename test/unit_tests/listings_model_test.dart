@@ -13,19 +13,19 @@ void main() {
   late MockFirebaseFirestore mockFirestore;
 
   setUp(() {
-    // Initialize the mock Firestore instance
+   
     mockFirestore = MockFirebaseFirestore();
   });
 
   test('addListing should call Firestore add with correct data', () async {
-    // Mock the Firestore collection
+    
     final mockCollection = MockCollectionReference<Map<String, dynamic>>();
     when(mockFirestore.collection('houses')).thenReturn(mockCollection);
 
-    // Create an instance of ListingsModel
+    // Creating instance of ListingsModel
     final listingsModel = ListingsModel();
 
-    // Prepare the listing data
+    
     final listingData = Listing(
       address: '123 Main St',
       numBeds: '3',

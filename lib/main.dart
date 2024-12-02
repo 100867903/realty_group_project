@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:realty_group_project/UserModel.dart';
 import 'ListingsPage.dart';
 import 'StarredListings.dart';
+import 'AddListingPage.dart'; // Import the AddListingPage
 import 'firebase_options.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-      ChangeNotifierProvider(create: (context) => StarredListings()),
-      ChangeNotifierProvider(create: (context) => UserModel()),
-      ],
+    ChangeNotifierProvider(
+      create: (context) => StarredListings(),
       child: const MyApp(),
     ),
   );
@@ -41,17 +38,30 @@ class MyApp extends StatelessWidget {
 
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
-            title: 'Temp Title',
+            title: 'Realty Group',
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
               useMaterial3: true,
             ),
             routes: {
-              '/listings': (context) => const ListingsPage()
+              '/listings': (context) => const ListingsPage(),
+              '/addListing': (context) => AddListingPage(), // Add route for AddListingPage
             },
-            home: const ListingsPage(),
+            home: Scaffold(
+              appBar: AppBar(
+                title: const Text('Listings'),
+              ),
+              body: ListingsPage(),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/addListing'); // Navigate to AddListingPage
+                },
+                child: const Icon(Icons.add),
+              ),
+            ),
           );
         }
+
         return const MaterialApp(
           home: Scaffold(
             body: Center(

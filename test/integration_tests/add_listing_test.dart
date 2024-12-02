@@ -9,21 +9,21 @@ void main() {
   testWidgets('User adds a new listing', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // Navigate to Add Listing Page
+    // Navigate Add Listing Page
     final addButton = find.byIcon(Icons.add);
     await tester.tap(addButton);
     await tester.pumpAndSettle();
 
-    // Fill out the form fields
-    await tester.enterText(find.byLabelText('Address'), '123 Main St');
-    await tester.enterText(find.byLabelText('Number of Bedrooms'), '3');
-    await tester.enterText(find.byLabelText('Number of Bathrooms'), '2');
-    await tester.enterText(find.byLabelText('Square Feet'), '1500');
-    await tester.enterText(find.byLabelText('Price'), '350000');
-    await tester.enterText(find.byLabelText('Image URL'), 'https://example.com/image.jpg');
+    // Filling out form fields
+    await tester.enterText(find.byKey(const Key('address_field')), '123 Main St');
+    await tester.enterText(find.byKey(const Key('beds_field')), '3');
+    await tester.enterText(find.byKey(const Key('baths_field')), '2');
+    await tester.enterText(find.byKey(const Key('square_feet_field')), '1500');
+    await tester.enterText(find.byKey(const Key('price_field')), '350000');
+    await tester.enterText(find.byKey(const Key('image_url_field')), 'https://example.com/image.jpg');
 
-    // Submit the form
-    final submitButton = find.text('Add Listing');
+    // Submiting the form
+    final submitButton = find.byKey(const Key('submit_button'));
     await tester.tap(submitButton);
     await tester.pumpAndSettle();
 
